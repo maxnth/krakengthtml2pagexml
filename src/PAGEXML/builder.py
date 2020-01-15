@@ -22,7 +22,7 @@ class PAGEBuilder:
     def get_image(self):
         img_type, img_base = utils.get_img_base64(self.tree)
 
-        height, width = utils.get_img_size(base64.decodebytes(bytes(img_base, "utf-8")))
+        width, height = utils.get_img_size(base64.decodebytes(bytes(img_base, "utf-8")))
         return {"base64": bytes(img_base, "utf-8"), "format": img_type, "height": height, "width": width}
 
     def get_lines(self):
@@ -30,7 +30,7 @@ class PAGEBuilder:
 
     def build_lines(self, region_id):
         lines = ""
-        for line_num, line in enumerate(self.get_lines()):
+        for line_num, line in sorted(enumerate(self.get_lines())):
             line_data = utils.create_line_dict(line)
             lines += template.TEXTLINE.format(_id="l{_lID}".format(_lID=str(line_num)),
                                               _points=utils.format_bbox(*line_data.get("line_bbox").split(", ")),
