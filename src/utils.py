@@ -12,8 +12,9 @@ def get_files(path=".", ext="html"):
 
 
 def parse_file(doc):
-    parser = etree.XMLParser(recover=True)
-    return etree.parse(doc, parser)
+    parser = etree.HTMLParser(recover=True)
+    tree = etree.parse(doc, parser)
+    return tree.getroot()
 
 
 def create_line_id(line_id):
@@ -31,7 +32,8 @@ def calc_bbox(points):
 
 
 def create_line_dict(line):
-    _text = "".join(line.itertext()).strip().replace("\t", "").replace("\n", "")
+    _text = "".join(line.xpath("descendant-or-self::text()")).replace("\n", "").replace("\t", "")
+    _text.strip()
 
     return {"line_id": line.get("id"), "line_bbox": line.get("data-bbox"), "line_text": _text}
 

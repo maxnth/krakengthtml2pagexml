@@ -28,6 +28,10 @@ class PAGEBuilder:
     def get_lines(self):
         return self.tree.xpath("//div[@class='column']/ul//li")
 
+    def get_line_coords(self):
+        return [[int(coord) for coord in line.get("data-bbox").split(", ")]
+                for line in self.get_lines()]
+
     def build_lines(self, region_id):
         lines = ""
         for line_num, line in sorted(enumerate(self.get_lines())):
