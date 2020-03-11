@@ -1,6 +1,5 @@
 # krakengthtml2pagexml
-quick and dirty conversion tool for a specific use case
-
+quick and dirty conversion tool for converting kraken html output for usage with other OCR workflows
 ```
 usage: convert.py [-h] -i INPUT [-o OUTPUT] [-e] [-es ENUMERATE_START]
 
